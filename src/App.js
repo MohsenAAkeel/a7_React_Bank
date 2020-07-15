@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import {Home, UserProfile, Login, Debits, Credits} from './components';
+import {Home, UserProfile, Login, AccountsView} from './components';
 import './App.css';
 
 class App extends Component {
@@ -23,7 +23,10 @@ class App extends Component {
        	newUser.userName = logInInfo.userName;
        	this.setState({currentUser: newUser});
     }   
-        
+
+    /*
+      
+    */
     //Adding a debit element to state.debit
     onAddDebit = (val) => {
        	this.setState((prevState)=> {
@@ -79,10 +82,10 @@ class App extends Component {
 		<Login user={this.state.currentUser} mockLogIn={this.mockLogIn}/>
 	);
 	const DebitsComponent = () => (
-		<Debits accounts={this.state.debits} accountBalance={this.state.accountBalance} onAddAccount={this.onAddDebit}/>
+		<AccountsView view="debits" accounts={this.state.debits} accountBalance={this.state.accountBalance} onAddAccount={this.onAddDebit}/>
 	);
 	const CreditsComponent = () => (
-		<Credits accounts={this.state.credits} accountBalance={this.state.accountBalance} onAddAccount={this.onAddCredit}/>
+		<AccountsView view="credits" accounts={this.state.credits} accountBalance={this.state.accountBalance} onAddAccount={this.onAddCredit}/>
 	);
 	
 	
