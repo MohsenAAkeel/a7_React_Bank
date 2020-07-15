@@ -1,0 +1,52 @@
+import React, { Component } from 'react';
+
+class DebitsForm extends Component {
+    constructor(props){
+	super(props);
+	this.state = {
+	    desc:'',
+	    amt:''
+	};
+    }
+
+    addDesc = (e) => {
+	e.preventDefault();
+	this.setState({
+	    desc: e.target.value
+	});
+    }
+
+    addAmt = (e) => {
+	e.preventDefault();
+	this.setState({
+	    amt: e.target.value
+	});
+    }
+
+    
+    handleClick = (e) => {
+	if(this.state.desc === '' || this.state.amt === ''){
+	    console.log("Description and amount are both required fields.");
+	    return;
+	}
+
+	//the default date value is today's date
+	let val = [this.state.desc, this.state.amt, Date.now()];
+	this.props.onAddDebit(val);
+	e.preventDefault();
+    }
+    
+    render(){
+	return(
+	    <form onSubmit={this.handleClick}>
+	     <label>Description</label>
+	      <input type="text" onChange={this.addDesc} />
+	     <label>Amount</label>
+	      <input type="text" onChange={this.addAmt} />
+	     <input type="submit" value="Submit" />
+	    </form>
+	);
+    }
+}
+
+export default DebitsForm;

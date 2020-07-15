@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import DetailRow from './DetailRow';
+
+class AccountsDisplay extends Component {
+    
+    
+    genRows = ()=> {
+	console.log(typeof this.props.debits);
+	if(this.props.debits.length === 0){
+	    return [];
+	}
+	
+	
+	let rows = this.props.debits.map((item, i) => {
+	    return(
+	        <DetailRow desc={item[0]} amt={item[1]} date={item[2]}/>
+	    );
+	});
+	
+	return rows;
+    }	
+		
+		
+    render() {
+	return (
+	    <table>
+		<tbody>
+		{this.genRows()}
+	        </tbody>
+	    </table>
+	);
+    }
+}
+
+
+export default AccountsDisplay;
